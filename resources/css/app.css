@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@theme {
+  --color-omf-light: #4268eb;
+  --color-omf: #0238e8;
+  --color-omf-dark: #011c75;
+  --font-sans: "Inter", sans-serif;
+}

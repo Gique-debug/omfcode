@@ -1,0 +1,52 @@
+services:
+  - type: web
+    name: omf
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    autoDeploy: true
+    healthCheckPath: /
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_URL
+        value: https://omftest.onrender.com
+      - key: SESSION_DRIVER
+        value: database
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: GROQ_API_KEY
+        sync: false
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: omf-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: omf-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: omf-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: omf-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: omf-db
+          property: password
+
+databases:
+  - name: omf-db
+    plan: free
+    databaseName: omf
+    user: omf
